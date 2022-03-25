@@ -1,37 +1,68 @@
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Stacks {
-    public static void setUp(Stack<Object> stack ) {
-        stack.push("v");
-        stack.push("a");
-        stack.push(1);
-        System.out.println(stack);
-    }
-
-    public static void Pop(Stack<Object> stack) {
-        if(stack == null) {
-            throw new NullPointerException();
-        }
-        else
-            stack.pop();
-        System.out.println(stack);
-    }
-
-    public static void max(Stack<Object> stack) {
-        int a = 0;
-        if(stack == null) {
-            throw new NullPointerException();
-        }
-        else {
-            System.out.println(stack.peek());
-        }
-    }
+    public static Stack<Integer> stack = new Stack<>();
 
     public static void main(String[] args) {
-        Stack<Object> stack = new Stack<Object>();
-        setUp(stack);
-        Pop(stack);
-        max(stack);
+
+        pushing();
+        for (int i = 0; i<14; i++) {
+            popping();
+        }
+        getMax();
+
+//	System.out.println(stack);
+
+    }
+
+    public static Integer popping() throws EmptyStackException {
+        int k = 0;
+
+        if (stack.size() == 0) {
+            try {
+                throw new EmptyStackException();
+            } catch (Exception e) {
+                System.out.println("Stack is Empty");
+            }
+        } else {
+            k = stack.pop();
+            System.out.println(stack);
+        }
+        return k;
+    }
+
+    public static void pushing(){
+
+        for (int i=10; i<13; i++) {
+            stack.push(i);
+            for (int j = 15; j>10; j--) {
+                stack.push(j);
+            }
+        }
+        System.out.println(stack);
+
+
+    }
+
+    public static Integer getMax() throws EmptyStackException {
+
+        int k = 0;
+        if (stack.size() == 0) {
+            try {
+                throw new EmptyStackException();
+            } catch (Exception e) {
+                System.out.println("Stack is Empty");
+            }
+        } else {
+            for (int i=0; i<stack.size(); i++) {
+                if (stack.get(i) >= k) {
+                    k = stack.get(i);
+                }
+            }
+            System.out.println(k);
+        }
+        return k;
     }
 
 }
